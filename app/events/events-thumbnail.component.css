@@ -9,3 +9,11 @@
 .thumbnail {
     min-height: 210px;
 }
+
+.green {
+    color: green !important;
+}
+
+.bold {
+    font-weight: bold;
+}
