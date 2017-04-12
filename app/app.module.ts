@@ -17,7 +17,8 @@ import { appRoutes } from './routes';
     EventsListComponent, 
     EventsThumbNailComponent,
     NavBarComponent,
-    EventDetailsComponent],
+    EventDetailsComponent,
+    NavBarComponent],
     bootstrap: [EventsAppComponent],
     providers: [EventsListService, ToastrService]
 })
