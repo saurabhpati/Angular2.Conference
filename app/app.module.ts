@@ -11,7 +11,7 @@ import { EventDetailsComponent } from './events/event-details/event-details.comp
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { Error404Component } from './events/error/404.component';
 import { appRoutes } from './routes';
-import { EventRouteActivator } from './events/event-details/event-route-avtivator.service';
+import { EventRouteActivator } from './events/event-details/event-route-activator.service';
 
 @NgModule({
     imports: [BrowserModule,
