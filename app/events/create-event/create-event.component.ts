@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 })
 
 export class CreateEventComponent {
+    
+    public isDirtyState: boolean = true;
 
     constructor(private router: Router) {
 
