@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { UserAuthService } from './user.auth.service';
 
 @Component({
-    templateUrl: 'app/user/user.login.component.html'
+    templateUrl: 'app/user/user.login.component.html',
+    styleUrls: ['app/user/user.login.component.css']
 })
 
 export class UserLoginComponent {
