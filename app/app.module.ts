@@ -14,7 +14,8 @@ import {
     Error404Component,
     EventRouteActivator,
     EventsListResolver
-} from './events/index'
+} from './events/index';
+import { UserAuthService } from './user/user.auth.service';
 
 @NgModule({
     imports: [BrowserModule,
@@ -34,7 +35,8 @@ import {
         provide: 'canDeactivateCreateEvent', 
         useValue: checkDirtyState 
     },
-    EventsListResolver]
+    EventsListResolver,
+    UserAuthService]
 })
 
 export class EventsAppModule {
