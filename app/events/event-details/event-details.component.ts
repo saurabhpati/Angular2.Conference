@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EventsListService } from '../shared/events.service';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute } from '@angular/router';
+import { IEvent } from "../index";
 
 @Component({
     templateUrl: 'app/events/event-details/event-details.component.html',
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class EventDetailsComponent { 
-    event;
+    event: IEvent;
     constructor(private eventsService: EventsListService, private route: ActivatedRoute) {
         this.event = this.eventsService.getEvent(+this.route.snapshot.params['id']);
     }
