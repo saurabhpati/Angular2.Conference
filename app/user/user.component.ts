@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from './user.auth.service';
 
 @Component({
-    templateUrl: 'app/user/user.component.html'
+    templateUrl: 'app/user/user.component.html',
+    styleUrls: ['app/user/user.component.css']
 })
 
 export class UserProfileComponent implements OnInit {
 
-    profileForm: FormGroup;
+    private profileForm: FormGroup;
+    private firstName: FormControl;
+    private lastName: FormControl;
 
     constructor(private authService: UserAuthService, private router: Router) {
 
     }
 
     ngOnInit(): void {
-        let firstName = new FormControl(this.authService.currentUser.firstName);
-        let lastName = new FormControl(this.authService.currentUser.lastName);
+        this.firstName = new FormControl(this.authService.currentUser.firstName, Validators.required);
+        this.lastName = new FormControl(this.authService.currentUser.lastName, Validators.required);
         this.profileForm = new FormGroup({
-            firstName: firstName,
-            lastName: lastName
+            firstName: this.firstName,
+            lastName: this.lastName
         });
     }
 
@@ -31,5 +34,10 @@ export class UserProfileComponent implements OnInit {
 
     cancel(): void {
         this.router.navigate(['/events']);
+    }
+
+    // Returns true, if form control is valid or untouched, false, otherwise
+    validateFormControl(formControl: FormControl): boolean {
+        return formControl.valid || formControl.untouched;
     }
 }
