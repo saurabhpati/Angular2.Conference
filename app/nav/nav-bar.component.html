@@ -10,7 +10,6 @@
           <a [routerLink]="['/events']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All Events</a>
         </li>
         <li><a [routerLink]="['events/new']" routerLinkActive="active">Create Event</a></li>
-        <li><a [routerLink]="['events/new']">Create Event</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
             Events
@@ -26,7 +25,7 @@
       <div class="navbar-header navbar-right">
         <ul class="nav navbar-nav">
           <li>
-            <a *ngIf="!authService.isAuthenticated()" [routerLink]="['/user/login']" routerLinkActive="active">Login</a>
+            <a *ngIf="!authService.isAuthenticated()" [routerLink]="['user/login']" routerLinkActive="active">Login</a>
             <a *ngIf="authService.isAuthenticated()" [routerLink]="['user/profile']" routerLinkActive="active">Welcome {{authService.currentUser.firstName}}</a>
           </li>
         </ul>

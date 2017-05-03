@@ -6,12 +6,6 @@ import { IEvent } from "./index";
 export class EventsListService {
     getEvents(): Observable<IEvent[]> {
         let subject = new Subject<IEvent[]>();
-import { Subject } from 'rxjs/Rx';
-
-@Injectable()
-export class EventsListService {
-    getEvents() {
-        let subject = new Subject();
         setTimeout(()=> {
             subject.next(EVENTS);
             subject.complete();
