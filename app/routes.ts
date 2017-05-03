@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import {
     EventsListComponent,
     EventDetailsComponent,
