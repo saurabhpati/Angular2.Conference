@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { EventsAppComponent } from './events-app.component';
 import { NavBarComponent } from './nav/nav-bar.component';
 import { appRoutes } from './routes';
@@ -19,7 +20,8 @@ import { UserAuthService } from './user/user.auth.service';
 
 @NgModule({
     imports: [BrowserModule,
-    RouterModule.forRoot(appRoutes)],
+    RouterModule.forRoot(appRoutes),
+    FormsModule],
     declarations: [EventsAppComponent, 
     EventsListComponent, 
     EventsThumbNailComponent,
@@ -48,5 +50,5 @@ function checkDirtyState(component: CreateEventComponent) {
         return window.confirm('You are trying to cancel unsaved event, do you wish to continue?');
     } 
     
-    return false;
+    return true;
 }

@@ -17,9 +17,8 @@
         <em *ngIf="profileForm.controls.lastName?.errors?.minlength">Must contain more than 1 letter</em>
         <input formControlName="lastName" id="lastName" type="text" class="form-control" placeholder="Last Name..." />
       </div>
-      <span>
-        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || (profileForm.valid && profileForm.untouched)">Save</button>
-      </span>
+      
+      <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || (profileForm.valid && profileForm.untouched)">Save</button>
       <button type="button" class="btn btn-default" (click)="cancel()" >Cancel</button>
     </form>
   </div>
