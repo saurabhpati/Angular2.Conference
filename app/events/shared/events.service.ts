@@ -22,6 +22,13 @@ export class EventsListService {
       event.sessions = [];
       EVENTS.push(event);
     }
+
+    // Replaces the old event with the new event to which
+    // a new session has recently been added.
+    updateEventOnSessionAddition(event: IEvent): void {
+      const index: number = EVENTS.findIndex(ev => ev.id === event.id);
+      EVENTS[index] = event;
+    }
 }
 
 const EVENTS: IEvent[] = [

@@ -22,4 +22,19 @@
       <div *ngIf="event?.onlineUrl">Online URL: {{event?.onlineUrl}}</div>
     </div>
   </div>
+
+  <hr>
+  
+  <div class="row">
+    <div class="col-md-2">
+      <h3 style="margin:0">Sessions</h3>
+    </div>
+
+    <div class="col-md-2">
+      <a (click)="createNewSession()">Create new Session</a>
+    </div>
+  </div>
+
+  <session-list *ngIf="!addSessionMode" [sessions]="event?.sessions"></session-list>
+  <create-session *ngIf="addSessionMode" (saveNewSession)="addNewSession($event)" (cancelCreateSession)="cancelCreateNewSession()"></create-session>
 </div>

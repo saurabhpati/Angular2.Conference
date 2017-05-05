@@ -15,7 +15,8 @@ import {
     Error404Component,
     EventRouteActivator,
     EventsListResolver,
-    CreateSessionComponent
+    CreateSessionComponent,
+    SessionListComponent
 } from './events/index';
 import { UserAuthService } from './user/user.auth.service';
 
@@ -24,6 +25,7 @@ import { UserAuthService } from './user/user.auth.service';
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule],
+
     declarations: [EventsAppComponent, 
     EventsListComponent, 
     EventsThumbNailComponent,
@@ -31,8 +33,11 @@ import { UserAuthService } from './user/user.auth.service';
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
-    CreateSessionComponent],
+    CreateSessionComponent,
+    SessionListComponent],
+
     bootstrap: [EventsAppComponent],
+    
     providers: [EventsListService, 
     ToastrService, 
     EventRouteActivator, 
