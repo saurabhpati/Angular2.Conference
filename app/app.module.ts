@@ -16,7 +16,8 @@ import {
     EventRouteActivator,
     EventsListResolver,
     CreateSessionComponent,
-    SessionListComponent
+    SessionListComponent,
+    CollapsibleWellComponent
 } from './events/index';
 import { UserAuthService } from './user/user.auth.service';
 
@@ -34,7 +35,8 @@ import { UserAuthService } from './user/user.auth.service';
     CreateEventComponent,
     Error404Component,
     CreateSessionComponent,
-    SessionListComponent],
+    SessionListComponent,
+    CollapsibleWellComponent],
 
     bootstrap: [EventsAppComponent],
     
