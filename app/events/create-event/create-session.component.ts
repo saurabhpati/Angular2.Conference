@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { restrictedWords, ISession } from "../index";
+import { ToastrService } from "../shared/index";
 
 @Component({
     selector: 'create-session',
@@ -20,7 +21,7 @@ export class CreateSessionComponent implements OnInit {
     level: FormControl;
     abstract: FormControl;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private toastrService: ToastrService) {
         
     }
 
@@ -51,6 +52,7 @@ export class CreateSessionComponent implements OnInit {
             voters: []
         };
         this.saveNewSession.emit(session);
+        this.toastrService.success(session.name + ' Session created');
     }
 
     validateDropdown(control: FormControl): boolean {
@@ -63,5 +65,6 @@ export class CreateSessionComponent implements OnInit {
 
     cancel(): void {
         this.cancelCreateSession.emit();
+        this.toastrService.info('Session Creation was cancelled, feel free to come back');
     }
 }
