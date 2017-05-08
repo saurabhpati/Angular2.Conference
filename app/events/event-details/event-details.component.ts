@@ -12,10 +12,12 @@ export class EventDetailsComponent {
     event: IEvent;
     addSessionMode: boolean;
     filterBy: string;
+    sortBy: string;
 
     constructor(private eventsService: EventsListService, private route: ActivatedRoute) {
         this.event = this.eventsService.getEvent(+this.route.snapshot.params['id']);
         this.filterBy = 'all';
+        this.sortBy = 'votes';
     }
 
     createNewSession(): void {

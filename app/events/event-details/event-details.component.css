@@ -10,3 +10,15 @@
 a {
     cursor: pointer;
 }
+
+.sort {
+    margin-left: -30px;
+}
+
+.filter {
+    margin-left: 20px;
+}
+
+.create {
+    margin-left: -65px;
+}
