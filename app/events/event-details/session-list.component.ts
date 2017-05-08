@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ISession } from "../index";
 
 @Component({
@@ -7,6 +7,19 @@ import { ISession } from "../index";
     styleUrls: ['app/events/event-details/session-list.component.css']
 })
 
-export class SessionListComponent {
-    @Input() sessions : ISession[];
+export class SessionListComponent implements OnChanges {
+
+    @Input() sessions: ISession[];
+    @Input() filterBy: string;
+    visibleSessions: ISession[];
+
+    ngOnChanges(changes: SimpleChanges): void {
+
+        if (!this.sessions) {
+            return;
+        }
+
+        this.visibleSessions = this.filterBy === 'all' ? this.sessions :
+            this.sessions.filter(session => session.level === this.filterBy);
+    }
 }

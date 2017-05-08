@@ -1,4 +1,5 @@
-<div class="row" *ngFor="let session of sessions">
+<em *ngIf="visibleSessions.length===0">There are no sessions for {{filterBy}} level</em>
+<div class="row" *ngFor="let session of visibleSessions">
   <div class="col-md-10">
     <collapsible-well [title]="session.name">
         <div well-title>

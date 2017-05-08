@@ -11,9 +11,11 @@ import { IEvent, ISession } from "../index";
 export class EventDetailsComponent { 
     event: IEvent;
     addSessionMode: boolean;
+    filterBy: string;
 
     constructor(private eventsService: EventsListService, private route: ActivatedRoute) {
         this.event = this.eventsService.getEvent(+this.route.snapshot.params['id']);
+        this.filterBy = 'all';
     }
 
     createNewSession(): void {
