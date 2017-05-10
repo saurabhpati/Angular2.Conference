@@ -14,7 +14,7 @@ export class SessionListComponent implements OnChanges {
     @Input() sortBy: string;
     visibleSessions: ISession[];
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: any): void {
 
         if (!this.sessions) {
             return;
