@@ -11,6 +11,7 @@ import {
     EventsListService,
     TOKEN_TOASTR,
     IToastr,
+    TOKEN_JQUERY,
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
@@ -19,11 +20,12 @@ import {
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
 } from './events/index';
 import { UserAuthService } from './user/user.auth.service';
 
 declare let toastr : IToastr;
+declare let jQuery: Object;
 
 @NgModule({
     imports: [BrowserModule,
@@ -49,6 +51,10 @@ declare let toastr : IToastr;
     {
         provide: TOKEN_TOASTR, 
         useValue: toastr 
+    },
+    {
+        provide: TOKEN_JQUERY, 
+        useValue: jQuery 
     },
     EventRouteActivator, 
     { 
