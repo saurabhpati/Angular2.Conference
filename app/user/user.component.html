@@ -1,9 +1,25 @@
-<h1>Edit your Profile</h1>
-<hr>
-<div class="col-md-6">
-    <h3>[Update Profile Form will go here]</h3>
-    <br/>
-    <br/>
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" class="btn btn-default">Cancel</button>
+<div>
+  <h1>Edit Your Profile </h1>
+  <hr>
+  <div class="col-md-4">
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm.value)" autocomplete="off" novalidate>
+      <div class="form-group" [ngClass]="{'error': !validateFormControl(firstName)}">
+        <label for="firstName">First Name:</label>
+        <em *ngIf="profileForm.controls.firstName?.errors?.required">Required</em>
+        <em *ngIf="profileForm.controls.firstName?.errors?.pattern">Must contain letters at start</em>
+        <em *ngIf="profileForm.controls.firstName?.errors?.minlength">Must contain more than 1 letter</em>
+        <input formControlName="firstName" id="firstName" type="text" class="form-control" placeholder="First Name..." />
+      </div>
+      <div class="form-group" [ngClass]="{'error': !validateFormControl(lastName)}">
+        <label for="lastName">Last Name:</label>
+        <em *ngIf="profileForm.controls.lastName?.errors?.required">Required</em>
+        <em *ngIf="profileForm.controls.lastName?.errors?.pattern">Must only contain letters at start</em>
+        <em *ngIf="profileForm.controls.lastName?.errors?.minlength">Must contain more than 1 letter</em>
+        <input formControlName="lastName" id="lastName" type="text" class="form-control" placeholder="Last Name..." />
+      </div>
+      
+      <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid || (profileForm.valid && profileForm.untouched)">Save</button>
+      <button type="button" class="btn btn-default" (click)="cancel()" >Cancel</button>
+    </form>
+  </div>
 </div>

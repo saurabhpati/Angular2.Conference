@@ -1,26 +1,51 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable } from 'rxjs/Rx';
-import { IEvent } from "./index";
+import { IEvent, ISession } from "./index";
 
 @Injectable()
 export class EventsListService {
     getEvents(): Observable<IEvent[]> {
         let subject = new Subject<IEvent[]>();
-import { Subject } from 'rxjs/Rx';
-
-@Injectable()
-export class EventsListService {
-    getEvents() {
-        let subject = new Subject();
         setTimeout(()=> {
             subject.next(EVENTS);
             subject.complete();
-        }, 2000);
+        }, 200);
         return subject;
     }
 
     getEvent(id: number): IEvent {
       return EVENTS.find(event => event.id === id);
+    }
+
+    addEvent(event: IEvent): void {
+      event.id = EVENTS.length + 1;
+      event.sessions = [];
+      EVENTS.push(event);
+    }
+
+    // Replaces the old event with the new event to which
+    // a new session has recently been added.
+    updateEventOnSessionAddition(event: IEvent): void {
+      const index: number = EVENTS.findIndex(ev => ev.id === event.id);
+      EVENTS[index] = event;
+    }
+
+    searchSessions(searchTerm: string) {
+      let term = searchTerm.toLocaleLowerCase();
+      let results: ISession[] = [];
+
+      EVENTS.forEach(event=> {
+        let foundSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
+        foundSessions = foundSessions.map((session: any) => {
+          session.eventId = event.id;
+          return session;
+        });
+        results = results.concat(foundSessions);
+      });
+
+      let emitter = new EventEmitter(true);
+      setTimeout(() => { emitter.emit(results) }, 100);
+      return emitter;
     }
 }
 

@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <h3>Create Session</h3>
+</div>
+<div class="col-md-6">
+  <form [formGroup]="sessionForm" (ngSubmit)=saveSession(sessionForm.value) autocomplete="off" novalidate>
+    <div class="form-group" [ngClass]="{'error': name?.invalid && name?.dirty}">
+      <label for="sessionName">Session Name:</label>
+      <em *ngIf="name?.errors?.required && (name?.dirty)">Required</em>
+      <input formControlName="name" id="sessionName" type="text" class="form-control" placeholder="session name..." />
+    </div>
+    <div class="form-group" [ngClass]="{'error': presenter?.invalid && presenter?.dirty}">
+      <label for="eventDate">Presenter:</label>
+      <em *ngIf="presenter?.errors?.required && (presenter?.dirty)">Required</em>
+      <input formControlName="presenter" id="presenter" type="text" class="form-control" placeholder="presenter..." />
+    </div>
+    <div class="form-group" [ngClass]="{'error':validateDropdown(duration)}">
+      <label for="duration">Duration:</label>
+      <em *ngIf="validateDropdown(duration)">Required</em>
+      <select formControlName="duration" class="form-control">
+        <option value="">select duration...</option>
+        <option value="1">Half Hour</option>
+        <option value="2">1 Hour</option>
+        <option value="3">Half Day</option>
+        <option value="4">Full Day</option>
+      </select>
+    </div>
+    <div class="form-group" [ngClass]="{'error':validateDropdown(level)}">
+      <label for="level">Level:</label>
+      <em *ngIf="validateDropdown(level)">Required</em>
+      <select formControlName="level" class="form-control">
+        <option value="">select level...</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+    </div>
+    <div class="form-group" [ngClass]="{'error': abstract?.invalid && abstract?.dirty}">
+      <label for="abstract">Abstract:</label>
+      <em *ngIf="abstract.errors?.maxlength">Not more than 400 characters</em>
+      <br *ngIf="abstract.errors?.maxlength"/>
+      <em *ngIf="abstract.errors?.restrictedWords">Restricted Words: {{abstract.errors?.restrictedWords}}</em>
+      <span class="textLength" *ngIf="abstract.value.length>0">{{abstract.value.length}}</span>
+      <textarea formControlName="abstract" id="abstract" rows=3 class="form-control" placeholder="abstract..."></textarea>
+    </div>
+    <button [disabled]="sessionForm.invalid" type="submit" class="btn btn-primary">Save</button>  
+    <button type="button" class="btn btn-default" (click)="cancel()" >Cancel</button>
+  </form>
+</div>
