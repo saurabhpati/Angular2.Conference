@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from './user.auth.service';
+import { TOKEN_TOASTR, IToastr } from "../events/index";
 
 @Component({
     templateUrl: 'app/user/user.component.html',
@@ -14,7 +15,10 @@ export class UserProfileComponent implements OnInit {
     private firstName: FormControl;
     private lastName: FormControl;
 
-    constructor(private authService: UserAuthService, private router: Router) {
+    constructor(
+        private authService: UserAuthService,
+        private router: Router,
+        @Inject(TOKEN_TOASTR) private toastrService: IToastr) {
 
     }
 
@@ -29,10 +33,12 @@ export class UserProfileComponent implements OnInit {
 
     saveProfile(formValues): void {
         this.authService.updateUser(formValues.firstName, formValues.lastName);
+        this.toastrService.success('Profile updated successfully!');
         this.router.navigate(['/events']);
     }
 
     cancel(): void {
+        this.toastrService.info('Profile update was cancelled');
         this.router.navigate(['/events']);
     }
 

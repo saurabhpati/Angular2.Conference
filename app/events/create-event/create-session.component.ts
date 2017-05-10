@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { restrictedWords, ISession } from "../index";
-import { ToastrService } from "../shared/index";
+import { TOKEN_TOASTR, IToastr } from "../shared/index";
 
 @Component({
     selector: 'create-session',
@@ -21,7 +21,7 @@ export class CreateSessionComponent implements OnInit {
     level: FormControl;
     abstract: FormControl;
 
-    constructor(private router: Router, private toastrService: ToastrService) {
+    constructor(private router: Router, @Inject(TOKEN_TOASTR) private toastrService: IToastr) {
         
     }
 

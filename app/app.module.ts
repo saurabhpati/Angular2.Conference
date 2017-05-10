@@ -9,7 +9,8 @@ import {
     EventsListComponent,
     EventsThumbNailComponent,
     EventsListService,
-    ToastrService,
+    TOKEN_TOASTR,
+    IToastr,
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
@@ -21,6 +22,8 @@ import {
     DurationPipe
 } from './events/index';
 import { UserAuthService } from './user/user.auth.service';
+
+declare let toastr : IToastr;
 
 @NgModule({
     imports: [BrowserModule,
@@ -43,7 +46,10 @@ import { UserAuthService } from './user/user.auth.service';
     bootstrap: [EventsAppComponent],
     
     providers: [EventsListService, 
-    ToastrService, 
+    {
+        provide: TOKEN_TOASTR, 
+        useValue: toastr 
+    },
     EventRouteActivator, 
     { 
         provide: 'canDeactivateCreateEvent', 
