@@ -12,6 +12,7 @@ import { userRoutes } from './user.routes';
         RouterModule.forChild(userRoutes),
         FormsModule,
         ReactiveFormsModule ],
+        FormsModule ],
     declarations: [UserProfileComponent, UserLoginComponent],
     providers: []
 })

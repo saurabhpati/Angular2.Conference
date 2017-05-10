@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserAuthService } from "../user/user.auth.service";
 import { EventsListService, ISession } from "../events/index";
 
+
 @Component({
     selector: 'nav-bar',
     templateUrl: 'app/nav/nav-bar.component.html',
