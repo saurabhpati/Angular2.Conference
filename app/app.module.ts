@@ -21,6 +21,8 @@ import {
     SessionListComponent,
     CollapsibleWellComponent,
     DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
 } from './events/index';
 import { UserAuthService } from './user/user.auth.service';
 
@@ -43,7 +45,9 @@ declare let jQuery: Object;
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe],
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective],
 
     bootstrap: [EventsAppComponent],
     

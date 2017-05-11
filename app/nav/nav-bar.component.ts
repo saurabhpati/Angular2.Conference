@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { UserAuthService } from "../user/user.auth.service";
-import { EventsListService, ISession } from "../events/index";
+import { EventsListService, ISession, TOKEN_TOASTR, IToastr } from "../events/index";
 
 
 @Component({
@@ -10,18 +10,25 @@ import { EventsListService, ISession } from "../events/index";
 })
 
 export class NavBarComponent {
-    
-    constructor(private authService: UserAuthService, private eventsListService: EventsListService ) {
+     
+    foundSessions: ISession[];
+
+    constructor(
+        private authService: UserAuthService, 
+        private eventsListService: EventsListService,
+        @Inject(TOKEN_TOASTR) private toastrService: IToastr ) {
         /* auth service is injected here because it is needed in the html template to evaluate 
         whether the user is authenticated and if yes, then to access the user's first name*/
     }
 
     searchSession(searchTerm: string): void{
-        let foundSessions: ISession[];
 
         this.eventsListService.searchSessions(searchTerm).subscribe(sessions=> {
-         foundSessions = sessions   
-         console.log(foundSessions);   
+         this.foundSessions = sessions;
+
+         if (this.foundSessions.length == 0) {
+            this.toastrService.error('No such sessions found for your search');
+         }
         });
     }
 }
