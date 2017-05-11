@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EventsListService } from '../shared/events.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { IEvent, ISession } from "../index";
 
 @Component({
@@ -15,7 +15,10 @@ export class EventDetailsComponent {
     sortBy: string;
   
     constructor(private eventsService: EventsListService, private route: ActivatedRoute) {
-        this.event = this.eventsService.getEvent(+this.route.snapshot.params['id']);
+        this.route.params.forEach((param: Params)=>{
+            this.event = this.eventsService.getEvent(+param['id']);
+            this.addSessionMode = false;
+        });
         this.filterBy = 'all';
         this.sortBy = 'votes';
     }
