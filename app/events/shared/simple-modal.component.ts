@@ -8,8 +8,4 @@ import { Component, Input } from '@angular/core';
 
 export class SimpleModalComponent {
     @Input() title: string;
-
-    constructor() {
-        this.title = "Matching Sessions";
-    }
 }
