@@ -10,13 +10,17 @@ import { TOKEN_JQUERY } from "./jQuery.service";
 export class SimpleModalComponent {
     @Input() title: string;
     @Input() elementId: string;
-    @ViewChild('modalContainer') containerEl: ElementRef
+    @Input() closeOnBodyClick: string;
+    @ViewChild('modalContainer') containerEl: ElementRef;
 
     constructor(@Inject(TOKEN_JQUERY) private $: any) {
 
     }
 
     closeModal(): void {
-        this.$(this.containerEl.nativeElement).modal('hide');
+
+        if (this.closeOnBodyClick === 'true') {
+            this.$(this.containerEl.nativeElement).modal('hide');    
+        }
     }
 }
