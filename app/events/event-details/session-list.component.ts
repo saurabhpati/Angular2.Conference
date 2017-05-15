@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ISession } from "../index";
+import { VoterService } from "./voter.service";
+import { UserAuthService } from "../../user/user.auth.service";
 
 @Component({
     selector: 'session-list',
@@ -13,6 +15,11 @@ export class SessionListComponent implements OnChanges {
     @Input() filterBy: string;
     @Input() sortBy: string;
     visibleSessions: ISession[];
+    private currentUserName: string;
+
+    constructor(private voterService: VoterService, private authService: UserAuthService) {
+        this.currentUserName = this.authService.currentUser.firstName;
+    }
 
     ngOnChanges(changes: any): void {
 
@@ -50,6 +57,20 @@ export class SessionListComponent implements OnChanges {
                 throw "Invalid sort value";
                 
         }
+    }
+
+    toggleVote(session: ISession): void {
+
+        if (this.hasUserVoted(session)) {
+            this.voterService.deleteUserVote(session, this.currentUserName);
+        } else {
+            this.voterService.addUserVote(session, this.currentUserName);
+            this.sortSessions();
+        }
+    }
+
+    hasUserVoted(session: ISession): boolean {
+        return this.voterService.hasUserVoted(session, this.currentUserName);
     }
 }
 
