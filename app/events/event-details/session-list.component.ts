@@ -16,9 +16,15 @@ export class SessionListComponent implements OnChanges {
     @Input() sortBy: string;
     visibleSessions: ISession[];
     private currentUserName: string;
+    private isAuthenticated: boolean;
 
     constructor(private voterService: VoterService, private authService: UserAuthService) {
-        this.currentUserName = this.authService.currentUser.firstName;
+
+        this.isAuthenticated = this.authService.isAuthenticated();
+
+        if (this.isAuthenticated) {
+             this.currentUserName = this.authService.currentUser.firstName;
+        }
     }
 
     ngOnChanges(changes: any): void {
