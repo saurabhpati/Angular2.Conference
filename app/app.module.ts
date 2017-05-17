@@ -24,7 +24,8 @@ import {
     SimpleModalComponent,
     ModalTriggerDirective,
     UpVoteSessionComponent,
-    VoterService
+    VoterService,
+    LocationValidator
 } from './events/index';
 import { UserAuthService } from './user/user.auth.service';
 
@@ -50,7 +51,8 @@ declare let jQuery: Object;
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
-    UpVoteSessionComponent],
+    UpVoteSessionComponent,
+    LocationValidator],
 
     bootstrap: [EventsAppComponent],
     
