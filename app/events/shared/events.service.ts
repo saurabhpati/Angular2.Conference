@@ -1,16 +1,29 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Subject, Observable } from 'rxjs/Rx';
 import { IEvent, ISession } from "./index";
+import 'rxjs/add/operator/map'; // Observable imported from  rxjs/Rx does not have map method, so pulled explicitly.
 
 @Injectable()
 export class EventsListService {
+
+    constructor(private http: Http) {
+
+    }
+
     getEvents(): Observable<IEvent[]> {
-        let subject = new Subject<IEvent[]>();
+        /*let subject = new Subject<IEvent[]>();
         setTimeout(()=> {
             subject.next(EVENTS);
             subject.complete();
         }, 200);
-        return subject;
+        return subject; 
+        
+        Uncomment when Http service is unavailable or devise a fallback strategy*/ 
+
+        return this.http.get('/api/events').map((response: Response) => {
+          return <IEvent[]>response.json();
+        }).catch(this.handleError);
     }
 
     getEvent(id: number): IEvent {
@@ -46,6 +59,10 @@ export class EventsListService {
       let emitter = new EventEmitter(true);
       setTimeout(() => { emitter.emit(results) }, 100);
       return emitter;
+    }
+
+    handleError(error: Response) {
+      return Observable.throw(error.statusText);
     }
 }
 
