@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions , Headers} from '@angular/http';
 import { Subject, Observable } from 'rxjs/Rx';
 import { IEvent, ISession } from "./index";
 import 'rxjs/add/operator/map'; // Observable imported from  rxjs/Rx does not have map method, so pulled explicitly.
@@ -30,18 +30,30 @@ export class EventsListService {
       return EVENTS.find(event => event.id === id);
     }
 
-    addEvent(event: IEvent): void {
-      event.id = EVENTS.length + 1;
-      event.sessions = [];
-      EVENTS.push(event);
+    addEvent(event: IEvent): Observable<IEvent> {
+      // event.id = EVENTS.length + 1;
+      // event.sessions = [];
+      // EVENTS.push(event);
+
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+
+      let options = new RequestOptions({
+        headers: headers
+      });
+
+      return this.http.post('/api/events', event, options).map((response: Response) => {
+        return <IEvent>response.json();
+      }).catch(this.handleError);
     }
 
     // Replaces the old event with the new event to which
     // a new session has recently been added.
-    updateEventOnSessionAddition(event: IEvent): void {
-      const index: number = EVENTS.findIndex(ev => ev.id === event.id);
-      EVENTS[index] = event;
-    }
+    // updateEventOnSessionAddition(event: IEvent): void {
+    //   const index: number = EVENTS.findIndex(ev => ev.id === event.id);
+    //   EVENTS[index] = event;
+    // }
 
     searchSessions(searchTerm: string) {
       let term = searchTerm.toLocaleLowerCase();

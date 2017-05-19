@@ -30,7 +30,8 @@ export class EventDetailsComponent {
     addNewSession(session: ISession): void {
         session.id = this.event.sessions.length + 1;
         this.event.sessions.push(session);
-        this.eventsService.updateEventOnSessionAddition(this.event);
+        //this.eventsService.updateEventOnSessionAddition(this.event);
+        this.eventsService.addEvent(this.event).subscribe();
         this.addSessionMode = false;
     }
 

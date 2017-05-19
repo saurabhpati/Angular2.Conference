@@ -18,10 +18,11 @@ export class CreateEventComponent {
     }
 
     saveEvent(formValues): void {
-        this.eventsListService.addEvent(formValues)
-        this.isDirtyState = false;
-        this.toastrService.success(formValues.name + ' Event created, you can now add sessions to this event');
-        this.router.navigate(['/events']);
+        this.eventsListService.addEvent(formValues).subscribe(event => {
+            this.isDirtyState = false;
+            this.toastrService.success(formValues.name + ' Event created, you can now add sessions to this event');
+            this.router.navigate(['/events']);
+        });
     }
 
     cancel(): void {
