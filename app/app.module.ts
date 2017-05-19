@@ -16,7 +16,7 @@ import {
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
-    EventRouteActivator,
+    EventResolver,
     EventsListResolver,
     CreateSessionComponent,
     SessionListComponent,
@@ -67,7 +67,7 @@ declare let jQuery: Object;
         provide: TOKEN_JQUERY, 
         useValue: jQuery 
     },
-    EventRouteActivator, 
+    EventResolver, 
     { 
         provide: 'canDeactivateCreateEvent', 
         useValue: checkDirtyState 

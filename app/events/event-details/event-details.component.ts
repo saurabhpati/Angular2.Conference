@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventsListService } from '../shared/events.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IEvent, ISession } from "../index";
@@ -8,19 +8,22 @@ import { IEvent, ISession } from "../index";
     styleUrls: ['app/events/event-details/event-details.component.css']
 })
 
-export class EventDetailsComponent { 
+export class EventDetailsComponent implements OnInit {
     event: IEvent;
     addSessionMode: boolean;
     filterBy: string;
     sortBy: string;
-  
+
     constructor(private eventsService: EventsListService, private route: ActivatedRoute) {
-        this.route.params.forEach((param: Params)=>{
-            this.event = this.eventsService.getEvent(+param['id']);
-            this.addSessionMode = false;
-        });
         this.filterBy = 'all';
         this.sortBy = 'votes';
+    }
+
+    ngOnInit(): void {
+        this.route.data.forEach((data) => {
+            this.event = data['event'];
+            this.addSessionMode = false;
+        });
     }
 
     createNewSession(): void {

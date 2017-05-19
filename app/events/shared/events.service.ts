@@ -26,8 +26,12 @@ export class EventsListService {
         }).catch(this.handleError);
     }
 
-    getEvent(id: number): IEvent {
-      return EVENTS.find(event => event.id === id);
+    getEvent(id: number): Observable<IEvent> {
+      //return EVENTS.find(event => event.id === id);
+      
+      return this.http.get('api/events/' + id).map((response: Response) => {
+        return <IEvent>response.json();
+      });
     }
 
     addEvent(event: IEvent): Observable<IEvent> {
