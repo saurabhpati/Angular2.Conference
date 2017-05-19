@@ -80,7 +80,7 @@ export class EventsListService {
 
     return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
       return response.json();
-    });
+    }).catch(this.handleError);
 
   }
 

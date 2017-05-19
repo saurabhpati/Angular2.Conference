@@ -2,3 +2,7 @@ em {
     float: right;
     color: red;
 }
+
+.alert {
+    margin-top: 10px; 
+}

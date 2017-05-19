@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { UserAuthService } from './user.auth.service';
+import { IToastr, TOKEN_TOASTR } from "../events/index";
 
 @Component({
     templateUrl: 'app/user/user.login.component.html',
@@ -9,13 +11,25 @@ import { UserAuthService } from './user.auth.service';
 
 export class UserLoginComponent {
 
-    constructor(private authService: UserAuthService, private router: Router) {
+    isInvalidLogin: boolean;
 
+    constructor(
+        private authService: UserAuthService, 
+        private router: Router,
+        @Inject(TOKEN_TOASTR) private toastr: IToastr) {
+        
     }
 
     login(formValues) {
-        this.authService.loginUser(formValues.userName, formValues.password);
-        this.router.navigate(['/events']);
+        this.authService.loginUser(formValues.userName, formValues.password).subscribe(response=> {
+            if (!response) {
+                this.isInvalidLogin = true;
+                this.toastr.error('Invalid login');
+            } else {
+                this.toastr.success('Welcome' + this.authService.currentUser.firstName);
+                this.router.navigate(['/events']);
+            }
+        });
     }
 
     cancel() {
