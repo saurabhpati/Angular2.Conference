@@ -47,6 +47,6 @@
   </div>
 
   <br/>
-  <session-list [sortBy]="sortBy" [filterBy]="filterBy" *ngIf="!addSessionMode" [sessions]="event?.sessions"></session-list>
+  <session-list [eventId]="event?.id" [sortBy]="sortBy" [filterBy]="filterBy" *ngIf="!addSessionMode" [sessions]="event?.sessions"></session-list>
   <create-session *ngIf="addSessionMode" (saveNewSession)="addNewSession($event)" (cancelCreateSession)="cancelCreateNewSession()"></create-session>
 </div>
