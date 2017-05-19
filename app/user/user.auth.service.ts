@@ -44,9 +44,20 @@ export class UserAuthService {
         });
     }
 
-    updateUser(firstName: string, lastName: string): void {
+    updateUser(firstName: string, lastName: string): Observable<IUser> {
         this.currentUser.firstName = firstName;
         this.currentUser.lastName = lastName;
+
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+
+        return this.http.put(`/api/users/${this.currentUser.id}`, this.currentUser, options).map((response: Response) => {
+            return <IUser>response.json();
+        });
     }
     
     isAuthenticated(): boolean {

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from './user.auth.service';
 import { TOKEN_TOASTR, IToastr } from "../events/index";
+import { IUser } from "./user.model";
 
 @Component({
     templateUrl: 'app/user/user.component.html',
@@ -32,9 +33,14 @@ export class UserProfileComponent implements OnInit {
     }
 
     saveProfile(formValues): void {
-        this.authService.updateUser(formValues.firstName, formValues.lastName);
-        this.toastrService.success('Profile updated successfully!');
-        this.router.navigate(['/events']);
+        this.authService.updateUser(formValues.firstName, formValues.lastName).subscribe((user: IUser)=> {
+            if (user) {
+                this.toastrService.success('Profile updated successfully!');
+                this.router.navigate(['/events']);    
+            } else {
+                this.toastrService.error('Profile updation failed');
+            }
+        });
     }
 
     cancel(): void {
