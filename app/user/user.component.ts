@@ -48,6 +48,12 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['/events']);
     }
 
+    logout(): void {
+        this.authService.logout().subscribe(() => {
+            this.router.navigate(['user/login']);
+        });
+    }
+
     // Returns true, if form control is valid or untouched, false, otherwise
     validateFormControl(formControl: FormControl): boolean {
         return formControl.valid || formControl.untouched;

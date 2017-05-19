@@ -59,7 +59,18 @@ export class UserAuthService {
             return <IUser>response.json();
         });
     }
-    
+
+    logout(): Observable<Response> {
+        this.currentUser = undefined;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        return this.http.post('/api/logout', {}, options);
+    }
+
     isAuthenticated(): boolean {
         return !!this.currentUser;
     }
