@@ -52,4 +52,18 @@ export class UserAuthService {
     isAuthenticated(): boolean {
         return !!this.currentUser;
     }
+
+    checkAuthenticationStatus(): void {
+        this.http.get('/api/currentIdentity').map((response: any) => {
+            if (response._body) {
+                return <IUser>response.json();
+            } else {
+                return <IUser>{};
+            }
+        }).do(loggedInUser => {
+            if (!!loggedInUser.userName) {
+                this.currentUser = loggedInUser;
+            }
+        }).subscribe();
+    }
 }
