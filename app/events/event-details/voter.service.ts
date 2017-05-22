@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { ISession } from "../index";
+import { Observable } from "rxjs/Rx";
 
 
 @Injectable()
@@ -14,7 +15,9 @@ export class VoterService {
     deleteUserVote(eventId: number, session: ISession, voterName: string): void {
         session.voters = session.voters.filter(voter => voter !== voterName);
 
-        this.http.delete(`/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`).subscribe();
+        this.http.delete(`/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`)
+        .catch(this.handleError)
+        .subscribe();
     }
 
     addUserVote(eventId: number, session: ISession, voterName: string): void {
@@ -27,10 +30,14 @@ export class VoterService {
         let options = new RequestOptions({
             headers: headers
         });
-        this.http.post(url, {}, options).subscribe();
+        this.http.post(url, {}, options).catch(this.handleError).subscribe();
     }
 
     hasUserVoted(session: ISession, voterName: string): boolean {
         return session.voters.includes(voterName);
+    }
+
+    handleError(error: Response) {
+        return Observable.throw(error.statusText);
     }
 }
