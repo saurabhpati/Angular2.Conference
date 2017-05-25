@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
-import { Subject, Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { IEvent, ISession } from './index';
 import 'rxjs/add/operator/map'; // Observable imported from  rxjs/Rx does not have map method, so pulled explicitly.
 
